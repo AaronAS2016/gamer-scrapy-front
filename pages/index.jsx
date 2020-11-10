@@ -1,9 +1,19 @@
 import React, { useState, useEffect, useCallback, useRef } from "react";
 import styles from "../src/styles/homepage.module.css";
 
-import { Input, Box, Flex, Grid, Text, Button, Image, IconButton } from "theme-ui";
+import {
+  Input,
+  Box,
+  Flex,
+  Grid,
+  Text,
+  Button,
+  Image,
+  IconButton,
+  Divider,
+} from "theme-ui";
 
-import { Header } from "../src/components/header"
+import { Header } from "../src/components/header";
 
 const URL_API = "http://localhost:8080/search/algunas_palabras/";
 
@@ -12,7 +22,6 @@ const textosCargando = ["", "", ""];
 const HomePage = () => {
   const [query, setQuery] = useState("");
   const [items, setItems] = useState([]);
-
 
   const handleButton = (query) => {
     console.log(query);
@@ -24,33 +33,60 @@ const HomePage = () => {
 
   return (
     <Flex sx={{ flexDirection: "column", alignItems: "center" }}>
-     
-      <Header/>
-      <Box sx={{paddingTop: 50}}>
-        <Text> GameScrapy </Text>
+      <Header />
+
+      <Box sx={{ padding: 100 }}>
+        <Box sx={{ padding: 50, fontSize: "2em", fontWeight: "bold" }}>
+          <Text> Busca precios de todos los juegos que quieras! </Text>
+        </Box>
+
+        <Flex sx={{ width: "100%", justifyContent: "center" }}>
+          <Flex
+            sx={{
+              flexDirection: "column",
+              width: "100%",
+              maxWidth: "400px",
+              alignItems: "center",
+              justifyContent: "center",
+            }}
+          >
+            <Input
+              defaultValue="Ingrese palabras para buscar"
+              sx={{ marginBottom: 2 }}
+              value={query}
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyDown={(e) => {
+                if (e.key === "Enter") {
+                  handleButton(query);
+                }
+              }}
+            />
+
+            <Button sx={{ width: "100%" }} onClick={() => handleButton(query)}>
+              Buscar
+            </Button>
+          </Flex>
+        </Flex>
+
+        {items.length > 0 && (
+          <Box sx={{paddingTop: 20}}>
+            <Flex sx={{ borderColor: "primary", borderWidth: 1, borderStyle: "solid", alignItems: "center", justifyContent: "space-between", padding:20 } }>
+              <Text sx={{width: "50%"}}>Titulo</Text>
+              <Text sx={{width: "25%"}}>Precio</Text>
+              <Text sx={{width: "25%"}}>Proveedor</Text>
+            </Flex>
+            <Flex sx={{ borderColor: "primary",  flexDirection:"column", borderWidth: 1, borderStyle: "solid", alignItems: "center", justifyContent: "space-between", padding:20 } }>
+              {items.map(({ title, price, provider }) => (
+                <Flex sx={{ width: "100%", justifyContent: "space-between", padding: 10 }}>
+                  <Text sx={{width: "50%", padding: "0 15px", boxSizing: "border-box"}}>{title}</Text>
+                  <Text sx={{width: "25%"}}>{price}</Text>
+                  <Text sx={{width: "25%"}}>{provider}</Text>
+                </Flex>
+              ))}
+            </Flex>
+          </Box>
+        )}
       </Box>
-
-      <div>
-        <Input
-          defaultValue="Ingrese palabras para buscar"
-          value={query}
-          onChange={(e) => setQuery(e.target.value)}
-        />
-
-        <Button onClick={() => handleButton(query)}>Buscar</Button>
-      </div>
-
-      {items.length > 0 && (
-        <div className={styles.resultados}>
-          {items.map(({ title, price, provider }) => (
-            <div>
-              <Text>{title}</Text>
-              <Text>{price}</Text>
-              <Text>{provider}</Text>
-            </div>
-          ))}
-        </div>
-      )}
     </Flex>
   );
 };
