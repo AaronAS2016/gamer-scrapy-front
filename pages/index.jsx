@@ -27,10 +27,11 @@ const HomePage = () => {
         
           <div className={styles.resultados}>
               {
-                items.map(({title, price, count}) => (
-                  <div key={count}>
+                items.map(({title, price, provider}) => (
+                  <div>
                     {title}
                     {price}
+                    {provider}
                   </div>
                 ))
               }
