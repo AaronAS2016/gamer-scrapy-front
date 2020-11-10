@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;700&display=swap');
 
 @font-face {
   font-family: "SNES";
@@ -8,11 +9,26 @@
 body {
   margin: 0;
   padding: 0;
-  font-family: "Roboto", sans-serif;
+  font-family: "Oswald", sans-serif;
   background-color: #000000;
 }
 
 @keyframes rotate {
     0% { transform: rotate(0deg); }
     100% { transform: rotate(360deg); }
+}
+
+@keyframes rotateUp {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(-90deg); }
+}
+
+@keyframes rotateDown {
+  0% { transform: rotate(-90deg); }
+  100% { transform: rotate(0); }
+}
+
+@keyframes moveDown {
+  0% { transform: translateY(0); }
+  100% { transform: translateY(150px); }
 }

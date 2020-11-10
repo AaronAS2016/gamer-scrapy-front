@@ -1,5 +1,11 @@
 // example theme colors
 export default {
+  buttons: {
+    disabled: {
+      color: "#666666",
+      bg: "#cccccc"
+    }
+  },
   colors: {
     text: "#fff",
     background: "#000",
