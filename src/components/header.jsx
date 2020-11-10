@@ -50,8 +50,8 @@ export const Header = () => {
           height: 50,
           backgroundImage:
             colorMode === "default"
-              ? "url('/img/sun.svg')"
-              : "url('/img/moon.svg')",
+              ? "url('/img/moon.svg')"
+              : "url('/img/sun.svg')",
           borders: "intial",
           backgroundPosition: "center",
         }}
