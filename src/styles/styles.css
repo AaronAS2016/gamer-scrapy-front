@@ -1,13 +1,18 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto&display=swap");
 
 @font-face {
-    font-family: "SNES";
-    src: url("/fonts/SnesItalic-1G9Be.ttf");
-  }
+  font-family: "SNES";
+  src: url("/fonts/SnesItalic-1G9Be.ttf");
+}
 
 body {
-    margin: 0;
-    padding: 0;
-    font-family: 'Roboto', sans-serif;
-    background-color: #000000;
+  margin: 0;
+  padding: 0;
+  font-family: "Roboto", sans-serif;
+  background-color: #000000;
+}
+
+@keyframes rotate {
+    0% { transform: rotate(0deg); }
+    100% { transform: rotate(360deg); }
 }
