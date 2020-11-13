@@ -65,9 +65,9 @@ const HomePage = () => {
   };
 
   return (
-    <Flex sx={{ flexDirection: "column", alignItems: "center" }}>
+    <Flex sx={{ flexDirection: "column", alignItems: "center", minHeight: "100vh", position:"relative" }}>
       <Header />
-      <Box sx={{ padding: 100 }}>
+      <Flex sx={{ padding: 50, width: "100%", textAlign:"center", alignItems: "center", flexDirection:"column" }}>
         {hasError && (
           <Text sx={{ textTransform: "uppercase" }}> Exploto todo! </Text>
         )}
@@ -139,6 +139,7 @@ const HomePage = () => {
                       filter: colorMode === "light" ? "invert(0)" : "invert(1)",
                       backgroundRepeat: "no-repeat",
                       backgroundPosition: "center",
+                      marginLeft: 3,
                       outline: 0,
                     }}
                     onClick={() => setDropdown(!dropDown)}
@@ -204,7 +205,7 @@ const HomePage = () => {
         )}
 
         {items.length > 0 && (
-          <Box sx={{ paddingTop: 20 }}>
+          <Box sx={{ paddingTop: 20, paddingBottom: 60, width: "70%" }}>
             <Flex
               sx={{
                 borderColor: "primary",
@@ -213,11 +214,13 @@ const HomePage = () => {
                 alignItems: "center",
                 justifyContent: "space-between",
                 padding: 20,
+                textAlign: "left"
               }}
             >
               <Text sx={{ width: "50%" }}>Titulo</Text>
-              <Text sx={{ width: "25%" }}>Precio</Text>
-              <Text sx={{ width: "25%" }}>Proveedor</Text>
+              <Text sx={{ width: "16%" }}>Precio</Text>
+              <Text sx={{ width: "16%" }}>Categoria</Text>
+              <Text sx={{ width: "16%" }}>Proveedor</Text>
             </Flex>
             <Flex
               sx={{
@@ -226,16 +229,19 @@ const HomePage = () => {
                 borderWidth: 1,
                 borderStyle: "solid",
                 alignItems: "center",
-                justifyContent: "space-between",
-                padding: 20,
+                justifyContent: "space-between"
               }}
             >
-              {items.map(({ title, price, provider }) => (
+              {items.map(({ title, price, provider, category }) => (
                 <Flex
                   sx={{
                     width: "100%",
                     justifyContent: "space-between",
                     padding: 10,
+                    borderBottomWidth: 1,
+                    borderBottomStyle: "solid",
+                    borderBottomColor: "primary",
+                    textAlign: "left"
                   }}
                 >
                   <Text
@@ -243,20 +249,22 @@ const HomePage = () => {
                       width: "50%",
                       padding: "0 15px",
                       boxSizing: "border-box",
+                   
                     }}
                   >
                     {title}
                   </Text>
-                  <Text sx={{ width: "25%" }}>{price}</Text>
-                  <Text sx={{ width: "25%" }}>{provider}</Text>
+                  <Text sx={{ width: "16%" }}>{parseInt(price) === 0 ? "Gratis!" : `$${price}` }</Text>
+                  <Text sx={{ width: "16%" }}>{category}</Text>
+                  <Text sx={{ width: "16%" }}>{provider}</Text>
                 </Flex>
               ))}
             </Flex>
           </Box>
         )}
-      </Box>
-      <Box sx={{position: "absolute", bottom: 0}}>
-              <Text>Hecho por Black Mesa Devs </Text>
+      </Flex>
+      <Box sx={{position: "absolute", bottom: 0, padding:20 ,  color: "#fff" , bg: "primary", width: "100%", textAlign: "center" }}>
+              <Text>Desarrollado por Black Mesa Devs </Text>
       </Box>
     </Flex>
   );
