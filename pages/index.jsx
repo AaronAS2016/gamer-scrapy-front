@@ -5,11 +5,11 @@ import { Flex } from "theme-ui";
 import { Header } from "../src/components/header";
 import { Error } from "../src/components/error";
 import { Loader } from "../src/components/loader";
-import { Table } from "../src/components/table";
+import { Resultados } from "../src/components/table";
 import { Footer } from "../src/components/footer";
+import { Buscador } from "../src/components/buscador";
 
 import { URL_API, generateTextRandom } from "../src/config/";
-import { Buscador } from "../src/components/buscador";
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
@@ -60,7 +60,7 @@ const HomePage = () => {
 
         <Buscador showBuscador={!isLoading} handleButton={handleButton} />
 
-        <Table items={items} showTable={items.length > 0} />
+        <Resultados items={items} showTable={items.length > 0} />
       </Flex>
       <Footer />
     </Flex>

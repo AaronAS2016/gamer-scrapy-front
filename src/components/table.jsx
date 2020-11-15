@@ -1,7 +1,18 @@
 import React from "react";
-import { Box, Flex, Text, Button } from "theme-ui"
+import { Box, Flex, Text, Button } from "theme-ui";
 
-export const Table = ({ items, showTable }) =>
+import { downloadFileJSON, exportCSVFile, generatePdfDocument } from "../utils/downloads";
+
+
+const headers = {
+  title: "Titulo",
+  price: "Precio",
+  provider: "Provedor",
+  category: "Categoria",
+  url: "URL producto",
+};
+
+export const Resultados = ({ items, showTable }) =>
   showTable && (
     <>
       <Box sx={{ paddingTop: 20, paddingBottom: 60, width: "70%" }}>
@@ -41,6 +52,8 @@ export const Table = ({ items, showTable }) =>
                 borderBottomStyle: "solid",
                 borderBottomColor: "primary",
                 textAlign: "left",
+                backgroundColor: index % 2 === 0 && "secondary",
+                color: index % 2 === 0 && "#fff",
               }}
               key={index}
             >
@@ -64,7 +77,7 @@ export const Table = ({ items, showTable }) =>
       </Box>
       <Flex
         sx={{
-          width: "100%",
+          width: "70%",
           textAlign: "center",
           justifyContent: "center",
           alignItems: "center",
@@ -74,7 +87,6 @@ export const Table = ({ items, showTable }) =>
       >
         <Text
           sx={{
-            fontWeight: "bold",
             fontSize: "2em",
             textTransform: "uppercase",
             padding: 20,
@@ -93,9 +105,10 @@ export const Table = ({ items, showTable }) =>
               width: "100%",
               margin: 10,
               cursor: "pointer",
+              padding: 20,
             }}
+            onClick={() => downloadFileJSON(items)}
           >
-  
             JSON
           </Button>
           <Button
@@ -103,9 +116,10 @@ export const Table = ({ items, showTable }) =>
               width: "100%",
               margin: 10,
               cursor: "pointer",
+              padding: 20,
             }}
+            onClick={() => exportCSVFile(headers, items, "informe")}
           >
-    
             CSV
           </Button>
           <Button
@@ -113,9 +127,11 @@ export const Table = ({ items, showTable }) =>
               width: "100%",
               margin: 10,
               cursor: "pointer",
+              padding: 20,
             }}
-          >
-            HTML
+            onClick={() => generatePdfDocument(items)}
+          > 
+          PDF 
           </Button>
         </Flex>
       </Flex>

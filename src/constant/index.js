@@ -10,12 +10,15 @@ export default {
     text: "#fff",
     background: "#000",
     primary: "#52057b",
+    secondary: "#892cdc",
 
     modes: {
       light: {
         text: "#000",
         background: "#f4f4f2",
         primary: "#52057b",
+        secondary: "#892cdc"
+
       },
     },
   },

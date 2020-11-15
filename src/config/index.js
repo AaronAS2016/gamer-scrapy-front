@@ -13,6 +13,8 @@ export const textosCargando = [
   "MIAMEEEEE!",
   "El orgulloso producto del trabajo en cuarentena",
   "Las llamas en tu cpu no son parte del programa",
+  "Disculpe, fuego tiene?",
+  "Do you like scraping other videogames?"
 ];
 
 export const generateTextRandom = () =>
