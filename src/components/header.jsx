@@ -33,6 +33,7 @@ export const Header = () => {
         justifyContent: "space-between",
         alignItems: "center",
         transition: "all .3s",
+        zIndex: "100"
       }}
     >
       <Text
