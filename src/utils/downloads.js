@@ -1,5 +1,5 @@
 import { saveAs } from "file-saver";
-import { pdf } from "@react-pdf/renderer";
+import { pdf, Text, View } from "@react-pdf/renderer";
 
 import { Document, Page } from "@react-pdf/renderer";
 import {
@@ -79,22 +79,25 @@ export function exportCSVFile(headers, itemsData, fileTitle) {
 const TablaPrecios = ({ items }) => (
   <Document>
     <Page>
-      <Table data={items}>
-        <TableHeader>
-          <TableCell>Titulo</TableCell>
-          <TableCell>Precio</TableCell>
-          <TableCell>Categoria</TableCell>
-          <TableCell>Provider</TableCell>
-          <TableCell>URL</TableCell>
-        </TableHeader>
-        <TableBody>
-          <DataTableCell getContent={(r) => r.title} />
-          <DataTableCell getContent={(r) => r.price} />
-          <DataTableCell getContent={(r) => r.category} />
-          <DataTableCell getContent={(r) => r.provider} />
-          <DataTableCell getContent={(r) => r.url} />
-        </TableBody>
-      </Table>
+      <View>
+        <Text> Resultados de la busqueda:  </Text>
+        <Table data={items}>
+          <TableHeader>
+            <TableCell>Titulo</TableCell>
+            <TableCell>Precio</TableCell>
+            <TableCell>Categoria</TableCell>
+            <TableCell>Provider</TableCell>
+            <TableCell>URL</TableCell>
+          </TableHeader>
+          <TableBody>
+            <DataTableCell getContent={(r) => r.title} />
+            <DataTableCell getContent={(r) => r.price} />
+            <DataTableCell getContent={(r) => r.category} />
+            <DataTableCell getContent={(r) => r.provider} />
+            <DataTableCell getContent={(r) => r.url} />
+          </TableBody>
+        </Table>
+      </View>
     </Page>
   </Document>
 );

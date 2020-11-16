@@ -9,11 +9,11 @@ import { Resultados } from "../src/components/table";
 import { Footer } from "../src/components/footer";
 import { Buscador } from "../src/components/buscador";
 
-import { URL_API, generateTextRandom } from "../src/config/";
+import { URL_API } from "../src/config/";
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
-  const [text, setText] = useState(generateTextRandom());
+
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
 
@@ -21,9 +21,8 @@ const HomePage = () => {
     setItems([]);
     setError(false);
     setLoading(true);
-    setText(generateTextRandom());
 
-    fetch(URL_API + modo + "/" + query.toLowerCase())
+    fetch(URL_API + modo + "/precio_desc/" + query.toLowerCase())
       .then((response) => response.json())
       .then((data) => {
         setItems(data);
@@ -56,7 +55,7 @@ const HomePage = () => {
         }}
       >
         <Error showError={hasError} />
-        <Loader showLoader={isLoading} text={text} />
+        {isLoading && <Loader showLoader={isLoading} />}
 
         <Buscador showBuscador={!isLoading} handleButton={handleButton} />
 

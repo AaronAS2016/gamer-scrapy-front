@@ -1,7 +1,13 @@
-import React from "react";
-import  { Flex, Text, Donut }  from "theme-ui"
+import React, { useState, useEffect } from "react";
+import { Flex, Text, Donut } from "theme-ui";
+import { generateTextRandom } from "../utils/randomText";
 
-export const Loader = ({ showLoader, text }) => {
+export const Loader = ({ showLoader }) => {
+  const [text, setText] = useState(generateTextRandom());
+  useEffect(() => {
+    let handler = setInterval(() => setText(generateTextRandom()), 5000);
+    return () => clearInterval(handler);
+  }, [showLoader]);
   return (
     <>
       {showLoader && (
