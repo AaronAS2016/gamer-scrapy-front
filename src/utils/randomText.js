@@ -7,7 +7,7 @@ export const textosCargando = [
     "No se experimentó con humanos en la realización de esta app",
     "Scrapeando por Fabian Lagorio",
     "Aviso: Cualquier parecido con otro proyecto es mera coincidencia.",
-    "Fabian Lagorio aproved",
+    "Fabian Lagorio approved",
     "MIAMEEEEE!",
     "El orgulloso producto del trabajo en cuarentena",
     "Las llamas en tu cpu no son parte del programa",
