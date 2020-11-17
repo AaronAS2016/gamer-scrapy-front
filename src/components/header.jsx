@@ -12,6 +12,7 @@ export const Header = () => {
     };
   
     useEffect(() => {
+      console.log("Codeado con ❤ por Black Mesa Devs")
       window.addEventListener("scroll", handleScroll, { passive: true });
   
       return () => {

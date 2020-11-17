@@ -29,7 +29,7 @@ const HomePage = () => {
 
     const rangoMaximo = parseInt(rango) === PRECIO_MAXIMO ? -1 : parseInt(rango) 
 
-    queryParams+=buildParams("rango", [0, rangoMaximo])
+    queryParams+= queryParams === "?" ? buildParams("rango", [0, rangoMaximo]) : "&" + buildParams("rango", [0, rangoMaximo]) 
 
     setItems([]);
     setError(false);
