@@ -1,5 +1,10 @@
 // example theme colors
-export default {
+export const theme = {
+  forms: {
+    slider: {
+      bg: "#892cdc"
+    },
+  },
   buttons: {
     disabled: {
       color: "#666666",
@@ -23,3 +28,6 @@ export default {
     },
   },
 };
+
+
+export const PRECIO_MAXIMO = 150 

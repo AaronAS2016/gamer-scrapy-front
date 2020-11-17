@@ -10,6 +10,10 @@ import { Footer } from "../src/components/footer";
 import { Buscador } from "../src/components/buscador";
 
 import { URL_API } from "../src/config/";
+import { buildParams } from "../src/utils/urlBuilder";
+import { PRECIO_MAXIMO } from "../src/constant";
+
+
 
 const HomePage = () => {
   const [items, setItems] = useState([]);
@@ -17,12 +21,21 @@ const HomePage = () => {
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
 
-  const handleButton = (query, modo) => {
+  const handleButton = (query, modo, sitioQueNoSeBusca, orden, rango) => {
+    let queryParams = "?";
+    if (sitioQueNoSeBusca.length > 0) {
+      queryParams+= buildParams("filtro", sitioQueNoSeBusca);
+    }
+
+    const rangoMaximo = parseInt(rango) === PRECIO_MAXIMO ? -1 : parseInt(rango) 
+
+    queryParams+=buildParams("rango", [0, rangoMaximo])
+
     setItems([]);
     setError(false);
     setLoading(true);
 
-    fetch(URL_API + modo + "/precio_desc/" + query.toLowerCase())
+    fetch(`${URL_API}${modo}/${orden}/${query.toLowerCase()}${queryParams}`)
       .then((response) => response.json())
       .then((data) => {
         setItems(data);

@@ -5,18 +5,22 @@ import {
   Box,
   Text,
   Flex,
-  Input,
-  IconButton,
-  Label,
-  Radio,
   Button,
 } from "theme-ui";
+import { BarraDeBusqueda } from "./buscador/search_bar";
+import { SelectModos } from "./buscador/search_modes";
+import { SelectOrder } from "./buscador/search_order";
+import { SlideRango } from "./buscador/search_range";
+import { SelectSitios } from "./buscador/search_site";
 
 export const Buscador = ({ showBuscador, handleButton }) => {
   const [dropDown, setDropdown] = useState(false);
   const [query, setQuery] = useState("");
   const [colorMode] = useColorMode();
   const [modo, setModo] = useState("algunas_palabras");
+  const [sitioQueNoSeBusca, agregarSitioBan] = useState([]);
+  const [precioMaximo, setPrecioMaximo ] = useState(150)
+  const [orden, setOrden] = useState("relevancia");
 
   return (
     showBuscador && (
@@ -37,34 +41,18 @@ export const Buscador = ({ showBuscador, handleButton }) => {
               justifyContent: "center",
             }}
           >
-            <Flex sx={{ width: "100%", marginBottom: 2 }}>
-              <Input
-                id="query"
-                value={query}
-                onChange={(e) => setQuery(e.target.value)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" && query.length > 0) {
-                    handleButton(query, modo);
-                  }
-                }}
-              />
-              <IconButton
-                sx={{
-                  height: "100%",
-                  backgroundImage: "url('/img/settings.svg')",
-                  animation: dropDown
-                    ? ".3s rotateDown linear forwards"
-                    : ".3s rotateUp linear forwards",
-                  boxSizing: "border-box",
-                  filter: colorMode === "light" ? "invert(0)" : "invert(1)",
-                  backgroundRepeat: "no-repeat",
-                  backgroundPosition: "center",
-                  marginLeft: 3,
-                  outline: 0,
-                }}
-                onClick={() => setDropdown(!dropDown)}
-              />
-            </Flex>
+            <BarraDeBusqueda
+              dropDown={dropDown}
+              setDropdown={setDropdown}
+              query={query}
+              setQuery={setQuery}
+              handleButton={handleButton}
+              colorMode={colorMode}
+              modo={modo}
+              sitioQueNoSeBusca={sitioQueNoSeBusca}
+              orden={orden}
+              rango={precioMaximo}
+            />
             {dropDown && (
               <Box
                 sx={{
@@ -74,48 +62,33 @@ export const Buscador = ({ showBuscador, handleButton }) => {
                   paddingBottom: 10,
                 }}
               >
-                <Label htmlFor="results_site">
-                  Maximos de resultados por sitio
-                </Label>
-                <Input defaultValue="10" id="results_site"></Input>
-                <Text sx={{ padding: "10px 0" }}>Modos:</Text>
-                <Flex mb={3} sx={{ paddingTop: 10 }}>
-                  <Label>
-                    <Radio
-                      name="modo"
-                      defaultChecked={modo == "algunas_palabras"}
-                      value="algunas_palabras"
-                      onClick={(e) => setModo(e.target.value)}
-                    />
-                    Algunas palabras
-                  </Label>
-                  <Label>
-                    <Radio
-                      name="modo"
-                      value="todas_palabras"
-                      defaultChecked={modo == "todas_palabras"}
-                      onClick={(e) => setModo(e.target.value)}
-                    />
-                    Todas las palabras
-                  </Label>
-                  <Label>
-                    <Radio
-                      name="modo"
-                      value="exacta"
-                      defaultChecked={modo == "exacta"}
-                      onClick={(e) => setModo(e.target.value)}
-                    />
-                    Exactas
-                  </Label>
-                </Flex>
+
+                <SelectModos 
+                  modo={modo} 
+                  setModo={setModo} 
+                />
+
+                <SelectSitios
+                  sitioQueNoSeBusca={sitioQueNoSeBusca}
+                  agregarSitioBan={agregarSitioBan}
+                />
+
+                <SelectOrder
+                  orden={orden}
+                  setOrden={setOrden}
+                />
+                <SlideRango
+                  precio={precioMaximo}
+                  setPrecioMaximo={setPrecioMaximo}
+                />
               </Box>
             )}
 
             <Button
               sx={{ width: "100%" }}
-              disabled={query.length === 0}
-              variant={query.length > 0 ? "primary" : "disabled"}
-              onClick={() => handleButton(query, modo)}
+              disabled={query.length === 0 || sitioQueNoSeBusca.length === 4}
+              variant={(query.length > 0 && sitioQueNoSeBusca.length < 4) ? "primary" : "disabled"}
+              onClick={() => handleButton(query, modo, sitioQueNoSeBusca, orden, precioMaximo)}
             >
               Buscar
             </Button>
