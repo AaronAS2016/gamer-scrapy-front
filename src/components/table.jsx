@@ -68,7 +68,7 @@ export const Resultados = ({ items, showTable, query }) =>
                 {title}
               </Text>
               <Text sx={{ width: "16%" }}>
-                {parseInt(price) === 0 ? "Gratis!" : `$${price}`}
+                {price === 0 ? "Gratis!" : `$${price}`}
               </Text>
               <Text sx={{ width: "16%" }}>{category}</Text>
               <Text sx={{ width: "16%" }}>{provider}</Text>
