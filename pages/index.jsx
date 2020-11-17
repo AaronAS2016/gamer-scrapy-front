@@ -20,6 +20,7 @@ const HomePage = () => {
 
   const [isLoading, setLoading] = useState(false);
   const [hasError, setError] = useState(false);
+  const [query, setQuery] = useState("");
 
   const handleButton = (query, modo, sitioQueNoSeBusca, orden, rango) => {
     let queryParams = "?";
@@ -70,9 +71,9 @@ const HomePage = () => {
         <Error showError={hasError} />
         {isLoading && <Loader showLoader={isLoading} />}
 
-        <Buscador showBuscador={!isLoading} handleButton={handleButton} />
+        <Buscador showBuscador={!isLoading} handleButton={handleButton} query={query} setQuery={setQuery} />
 
-        <Resultados items={items} showTable={items.length > 0} />
+        <Resultados items={items} showTable={items.length > 0} query={query} />
       </Flex>
       <Footer />
     </Flex>

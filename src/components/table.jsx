@@ -1,5 +1,6 @@
 import React from "react";
 import { Box, Flex, Text, Button } from "theme-ui";
+import { getActualDate } from "../utils/actualDate";
 
 import { downloadFileJSON, exportCSVFile, generatePdfDocument } from "../utils/downloads";
 
@@ -12,7 +13,7 @@ const headers = {
   url: "URL producto",
 };
 
-export const Resultados = ({ items, showTable }) =>
+export const Resultados = ({ items, showTable, query }) =>
   showTable && (
     <>
       <Box sx={{ paddingTop: 20, paddingBottom: 60, width: "70%" }}>
@@ -107,7 +108,7 @@ export const Resultados = ({ items, showTable }) =>
               cursor: "pointer",
               padding: 20,
             }}
-            onClick={() => downloadFileJSON(items)}
+            onClick={() => downloadFileJSON(items, `${query.toLowerCase().replace(" ", "_") + "_" + getActualDate()}`)}
           >
             JSON
           </Button>
@@ -118,7 +119,7 @@ export const Resultados = ({ items, showTable }) =>
               cursor: "pointer",
               padding: 20,
             }}
-            onClick={() => exportCSVFile(headers, items, "informe")}
+            onClick={() => exportCSVFile(headers, items, `${query.toLowerCase().replace(" ", "_") + "_" + getActualDate()}`)}
           >
             CSV
           </Button>
@@ -129,7 +130,7 @@ export const Resultados = ({ items, showTable }) =>
               cursor: "pointer",
               padding: 20,
             }}
-            onClick={() => generatePdfDocument(items)}
+            onClick={() => generatePdfDocument(items, query, `${query.toLowerCase().replace(" ", "_") + "_" + getActualDate()}`)}
           > 
           PDF 
           </Button>

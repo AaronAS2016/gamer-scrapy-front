@@ -13,9 +13,8 @@ import { SelectOrder } from "./buscador/search_order";
 import { SlideRango } from "./buscador/search_range";
 import { SelectSitios } from "./buscador/search_site";
 
-export const Buscador = ({ showBuscador, handleButton }) => {
+export const Buscador = ({ showBuscador, handleButton, query, setQuery }) => {
   const [dropDown, setDropdown] = useState(false);
-  const [query, setQuery] = useState("");
   const [colorMode] = useColorMode();
   const [modo, setModo] = useState("algunas_palabras");
   const [sitioQueNoSeBusca, agregarSitioBan] = useState([]);
