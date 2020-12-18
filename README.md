@@ -2,7 +2,7 @@
 
 Requisito NodeJS https://nodejs.org/es/
 
-comandos 
+### Capturas
 
 <img src="./.readme/main.png"  width="500">
 <img src="./.readme/main.png"  width="500">
